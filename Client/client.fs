@@ -20,13 +20,15 @@ let main argv =
                 }
             }
         }")
+
+    Console.WriteLine("Enter a number between 20 and 50")
     let spiroCmd = Console.ReadLine();
 
     use system = ActorSystem.Create("MyClient", config)
 
     let spirographer = system.ActorSelection("akka.tcp://MyServer@localhost:8081/user/spirog")
 
-    let msg = Spiro(35)
+    let msg = Spiro(int spiroCmd)
     spirographer.Tell msg
     Console.ReadLine() |> ignore
     0

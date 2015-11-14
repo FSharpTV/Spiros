@@ -5,5 +5,5 @@
 type Greet(who:string) =
     member x.Who = who
 
-type Spiro(cmd) =
-    member x.Cmd = cmd
+type Spiro(cmd:int) =
+    member public x.Cmd = cmd

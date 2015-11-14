@@ -10,10 +10,18 @@ open FSharp.TV.Types
 //    do printfn "Starting Actor"
 //    do g.Receive<obj>(fun (spiro:(Turtle->Turtle) list) -> FSharp.TV.SunFlower.buildSpiro spiro)
 System.IO.Directory.SetCurrentDirectory __SOURCE_DIRECTORY__
+
+let handleCmd (s:Spiro) = 
+    let cmd = (int s.Cmd)
+    printfn "Msg Recieved %A" cmd
+    let r = FSharp.TV.SunFlower.build cmd
+    r
+
 type SpiroActor() as g =
     inherit ReceiveActor()
     do printfn "Starting Actor"
-    do g.Receive<_>(fun (cmd) -> printfn "Msg Recieved"; FSharp.TV.SunFlower.build 40 ) |> ignore
+//    do g.Receive<_>(fun (cmd) -> handleCmd cmd) |> ignore
+    do g.Receive<_>(fun (cmd:Spiro) -> handleCmd cmd) |> ignore
 
 [<EntryPoint>]
 let main argv =
