@@ -1,0 +1,6 @@
+framework: net45
+source https://www.nuget.org/api/v2
+
+nuget Suave
+nuget Suave.DotLiquid
+nuget FSharp.Core
