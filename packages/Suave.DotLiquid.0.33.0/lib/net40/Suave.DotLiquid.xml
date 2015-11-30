@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Suave.DotLiquid</name></assembly>
+<members>
+<member name="M:Suave.DotLiquid.registerFiltersByType(System.Type)">
+<summary>
+ Similar to `registerFiltersByName`, but the module is speicfied by its `System.Type`
+ (This is more cumbersome, but safer alternative.)
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.registerFiltersByName(System.String)">
+<summary>
+ Register functions from a module as filters available in DotLiquid templates.
+ For example, the following snippet lets you write `{{ model.Total | nuce_num }}`:
+
+     module MyFilters = 
+       let niceNum i = if i &gt; 10 then &quot;lot&quot; else &quot;not much&quot;
+
+     do registerFiltersByName &quot;MyFilters&quot;
+
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.page``1(System.String,``0,Suave.Types.HttpContext)">
+<summary>
+ Render a page using DotLiquid template. Takes a path (relative to the directory specified
+ using `setTemplatesDir` and a value that is exposed as the &quot;model&quot; variable. You can use
+ any F# record type, seq&lt;_&gt; and list&lt;_&gt; without having to explicitly register the fields.
+
+     type Page = { Total : int }
+     let app = page &quot;index.html&quot; { Total = 42 } 
+
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.setTemplatesDir(System.String)">
+<summary>
+ Set the root directory where DotLiquid is looking for templates. For example, you can 
+ write something like this:
+
+     DotLiquid.setTemplatesDir (__SOURCE_DIRECTORY__ + &quot;/templates&quot;)
+
+ The current directory is a global variable and so it should not change between 
+ multiple HTTP requests. This is a DotLiquid limitation.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="P:Suave.DotLiquid.loadTemplateCached">
+<summary>
+ Load template &amp; memoize &amp; automatically reload when the file changes
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.loadTemplate``1(System.Type,System.String)">
+<summary>
+ Asynchronously loads a template &amp; remembers the last write time
+ (so that we can automatically reload the template when file changes)
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.parseTemplate(System.String,System.Type)">
+<summary>
+ Parse the specified template &amp; register the type that we want to use as &quot;model&quot;
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.asyncMemoize``2(Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Core.FSharpFunc{``1,System.Boolean}},Microsoft.FSharp.Core.FSharpFunc{``0,Microsoft.FSharp.Control.FSharpAsync{``1}})">
+<summary>
+ Use the ruby naming convention by default
+ Memoize asynchronous function. An item is recomputed when `isValid` returns `false`
+</summary>
+</member>
+<member name="P:Suave.DotLiquid.registerTypeTree">
+<summary>
+ Given a type which is an F# record containing seq&lt;_&gt;, list&lt;_&gt; and other
+ records, register the type with DotLiquid so that its fields are accessible
+</summary>
+</member>
+<member name="P:Suave.DotLiquid.safe">
+<summary>
+ Protects accesses to various DotLiquid internal things
+</summary>
+</member>
+<member name="M:Suave.DotLiquid.localFileSystem(System.String)">
+<summary>
+ Represents a local file system relative to the specified &apos;root&apos;
+</summary>
+</member>
+<member name="T:Suave.DotLiquid">
+
+</member>
+</members>
+</doc>
