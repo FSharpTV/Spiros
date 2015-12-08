@@ -71,7 +71,7 @@ let getFiles _ =
   Directory.EnumerateFiles(Environment.CurrentDirectory, "*.bmp")
   |> Seq.map Path.GetFileNameWithoutExtension
   |> Seq.map (fun x -> sprintf "<div><a href='/images/%s'>%s</a></div><img src=\"/images/%s\"/>" x x x)
-  |> Seq.reduce (+)
+  |> Seq.fold (+) ""
   |> sprintf "<html><head><meta http-equiv=\"refresh\" content=\"5\"></head>%s</html>"
   |> OK
 
